@@ -4,9 +4,9 @@
 
 ## 🧠 À propos
 
-**Reporter** est une plateforme de streaming indépendante dédiée à l'investigation, à l'information citoyenne et aux contenus sociétaux. Inspirée de Netflix, France.tv ou BrutX, elle permet la **diffusion de documentaires, d’émissions en direct**, et la **publication d’articles techniques** à forte valeur ajoutée grâce à l’intelligence artificielle.
+Reporter est une plateforme de streaming indépendante dédiée à l’investigation, à l’information citoyenne et aux thématiques sociétales. Inspirée de Netflix, France.tv ou BrutX, elle propose la diffusion de documentaires, d’émissions en direct, ainsi que de films et séries à forte valeur ajoutée.
 
-Ce projet est né de la volonté de proposer une **alternative indépendante et intelligente** dans le paysage numérique, en mettant en avant l’investigation, l’analyse critique et la technologie.
+Ce projet est né d’une volonté de créer une alternative libre et indépendante, Reporter ambitionne de devenir une référence dans le paysage médiatique engagé.
 
 ---
 
