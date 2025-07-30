@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Video {
+  id         Int         @id @default(autoincrement())
+  title      String
+  category   String
+  thumbnail  String
+  createdAt  DateTime    @default(now())
+  statistics Statistic[]
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Announcement {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+
+  // Champs personnalisés
+  provider   String? // ex: "google", "facebook"
+  providerId String?
+  password   String? // Nullable si login OAuth
+  gender     String?
+  birthDate  DateTime?
+  postalCode String?
+  newsletter Boolean   @default(false)
+  role       String    @default("user")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+}
+
+model Statistic {
+  id        Int      @id @default(autoincrement())
+  views     Int      @default(0)
+  videoId   Int
+  createdAt DateTime @default(now())
+
+  video Video @relation(fields: [videoId], references: [id])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model PasswordResetToken {
+  token   String   @id
+  email   String
+  expires DateTime
+}
+
+model AdminUser {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model VideoContent {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  category    String
+  featured    Boolean  @default(false)
+  thumbnail   String
+  video       String
+  createdAt   DateTime @default(now())
+}
